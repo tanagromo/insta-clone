@@ -36,14 +36,15 @@ export const UserType = new GraphQLObjectType({
         },
         friends:{
             type: new GraphQLList(UserType),
-            resolve(user){
+            resolve(user){ 
                 const {_id} = user
-                console.log(user)
-                return User.findById(_id).populate('friends').then().catch()
+                let allfr = User.findById(_id).then((user)=>{
+                    return User.find({'_id':{$in:user.friends}}).exec()
+                })
+                console.log(allfr)
+                return allfr
+
             }
-        },
-        posts:{
-            type: new GraphQLNonNull(new GraphQLList(PostType))  
         },
         create_at:{
             type:GraphQLString

@@ -27,5 +27,11 @@ export default {
         })
     }
 
+    /*resolve(user){
+        const {_id} = user
+        console.log(user)
+        return User.findById(_id).populate('friends').then().catch()
+    }*/
+
 
 }
